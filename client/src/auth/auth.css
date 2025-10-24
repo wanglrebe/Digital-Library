@@ -1,0 +1,639 @@
+/* ========================================
+   认证系统样式 - 像素风登录/激活界面
+   ======================================== */
+
+/* 认证遮罩层 - 温暖渐变背景 */
+#auth-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  
+  /* 温暖的棕色渐变 */
+  background: linear-gradient(
+    135deg,
+    #2c1810 0%,
+    #3d2415 30%,
+    #2c1810 60%,
+    #3d2415 100%
+  );
+  
+  /* 像素纹理 */
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,.05) 2px,
+      rgba(0,0,0,.05) 4px
+    );
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* 淡入动画 */
+  animation: authFadeIn 0.6s ease-out;
+}
+
+@keyframes authFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 背景装饰 - 漂浮的书本 */
+.auth-decoration {
+  position: absolute;
+  font-size: 40px;
+  opacity: 0.1;
+  animation: floatBook 20s infinite ease-in-out;
+  pointer-events: none;
+}
+
+.auth-decoration:nth-child(1) {
+  top: 10%;
+  left: 15%;
+  animation-delay: 0s;
+}
+
+.auth-decoration:nth-child(2) {
+  top: 60%;
+  left: 80%;
+  animation-delay: -5s;
+}
+
+.auth-decoration:nth-child(3) {
+  top: 30%;
+  right: 20%;
+  animation-delay: -10s;
+}
+
+.auth-decoration:nth-child(4) {
+  bottom: 20%;
+  left: 25%;
+  animation-delay: -15s;
+}
+
+@keyframes floatBook {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-30px) rotate(5deg);
+  }
+}
+
+/* ========================================
+   登录卡片
+   ======================================== */
+
+.auth-card {
+  background: var(--ui-bg);
+  border: 4px solid var(--ui-border);
+  box-shadow: 
+    inset -3px -3px 0 rgba(0, 0, 0, 0.5),
+    6px 6px 0 rgba(0, 0, 0, 0.5);
+  
+  padding: 40px 50px;
+  width: 90%;
+  max-width: 480px;
+  
+  font-family: var(--font-pixel-cn);
+  
+  /* 入场动画 */
+  animation: cardSlideIn 0.5s ease-out 0.3s both;
+}
+
+@keyframes cardSlideIn {
+  from {
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Logo 区域 */
+.auth-logo {
+  text-align: center;
+  margin-bottom: 30px;
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+.auth-logo-icon {
+  font-size: 64px;
+  display: block;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.auth-logo-title {
+  font-family: var(--font-pixel-en);
+  font-size: 20px;
+  color: var(--accent);
+  margin: 0;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+  letter-spacing: 2px;
+}
+
+.auth-logo-subtitle {
+  font-size: 12px;
+  color: var(--primary-text);
+  margin-top: 8px;
+  opacity: 0.7;
+}
+
+/* 表单区域 */
+.auth-form {
+  margin-top: 30px;
+}
+
+.auth-input-group {
+  margin-bottom: 20px;
+}
+
+.auth-label {
+  display: block;
+  font-size: 12px;
+  color: var(--accent);
+  margin-bottom: 8px;
+  font-family: var(--font-pixel-cn);
+}
+
+.auth-input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--ui-border);
+  color: var(--primary-text);
+  font-family: var(--font-pixel-cn);
+  font-size: 14px;
+  padding: 12px 16px;
+  outline: none;
+  
+  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.3);
+  
+  transition: all 0.2s;
+}
+
+.auth-input:focus {
+  border-color: var(--accent);
+  background: rgba(0, 0, 0, 0.7);
+  box-shadow: 
+    inset 2px 2px 0 rgba(0, 0, 0, 0.3),
+    0 0 0 3px rgba(212, 165, 116, 0.2);
+}
+
+.auth-input::placeholder {
+  color: #666;
+}
+
+/* 提交按钮 */
+.auth-button {
+  width: 100%;
+  background: var(--accent);
+  border: 3px solid var(--ui-border);
+  color: var(--primary-bg);
+  font-family: var(--font-pixel-cn);
+  font-size: 16px;
+  font-weight: bold;
+  padding: 14px;
+  cursor: pointer;
+  
+  box-shadow: 
+    inset -2px -2px 0 rgba(0, 0, 0, 0.3),
+    4px 4px 0 rgba(0, 0, 0, 0.4);
+  
+  transition: all 0.15s;
+  
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.auth-button:hover::before {
+  transform: translateX(100%);
+}
+
+.auth-button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 
+    inset -2px -2px 0 rgba(0, 0, 0, 0.3),
+    6px 6px 0 rgba(0, 0, 0, 0.5);
+}
+
+.auth-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 
+    inset -2px -2px 0 rgba(0, 0, 0, 0.3),
+    2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.auth-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* 加载状态 */
+.auth-button.loading {
+  pointer-events: none;
+}
+
+.auth-button.loading::after {
+  content: '...';
+  animation: loadingDots 1.5s infinite;
+}
+
+@keyframes loadingDots {
+  0%, 20% { content: '.'; }
+  40% { content: '..'; }
+  60%, 100% { content: '...'; }
+}
+
+/* 错误提示 */
+.auth-error {
+  background: rgba(217, 87, 99, 0.2);
+  border: 2px solid var(--error);
+  color: var(--error);
+  font-size: 11px;
+  padding: 10px 12px;
+  margin-top: 16px;
+  
+  animation: shakeError 0.4s;
+}
+
+@keyframes shakeError {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+/* 底部提示 */
+.auth-footer {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 10px;
+  color: #8b6f47;
+  line-height: 1.6;
+}
+
+.auth-footer-hint {
+  margin-top: 8px;
+  font-size: 9px;
+  opacity: 0.6;
+}
+
+/* 开发工具提示 */
+.dev-hint {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid var(--info);
+  color: var(--info);
+  font-family: var(--font-pixel-en);
+  font-size: 9px;
+  padding: 8px 12px;
+  z-index: 10001;
+  
+  animation: devHintPulse 2s infinite;
+}
+
+@keyframes devHintPulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* ========================================
+   响应式调整
+   ======================================== */
+
+@media (max-width: 768px) {
+  .auth-card {
+    padding: 30px 24px;
+    max-width: 90%;
+  }
+  
+  .auth-logo-icon {
+    font-size: 48px;
+  }
+  
+  .auth-logo-title {
+    font-size: 16px;
+  }
+  
+  .auth-input {
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+  
+  .auth-button {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+
+/* ========================================
+   激活流程样式
+   ======================================== */
+
+.activation-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  
+  background: linear-gradient(
+    135deg,
+    #2c1810 0%,
+    #3d2415 30%,
+    #2c1810 60%,
+    #3d2415 100%
+  );
+  
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,.05) 2px,
+      rgba(0,0,0,.05) 4px
+    );
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  animation: authFadeIn 0.6s ease-out;
+}
+
+/* 激活卡片 */
+.activation-card {
+  background: var(--ui-bg);
+  border: 4px solid var(--ui-border);
+  box-shadow: 
+    inset -3px -3px 0 rgba(0, 0, 0, 0.5),
+    6px 6px 0 rgba(0, 0, 0, 0.5);
+  
+  padding: 30px 40px 40px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 85vh;
+  overflow-y: auto;
+  
+  font-family: var(--font-pixel-cn);
+  
+  animation: cardSlideIn 0.5s ease-out 0.3s both;
+}
+
+/* 进度指示器 */
+.activation-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  gap: 8px;
+}
+
+.progress-dot {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--ui-border);
+  border-radius: 50%;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.progress-dot::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background: transparent;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.progress-dot.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(212, 165, 116, 0.5);
+  animation: progressPulse 2s infinite;
+}
+
+.progress-dot.active::before {
+  background: var(--accent);
+}
+
+.progress-dot.completed {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.progress-dot.completed::before {
+  content: '✓';
+  background: transparent;
+  color: var(--primary-bg);
+  font-size: 16px;
+  font-weight: bold;
+  width: auto;
+  height: auto;
+}
+
+@keyframes progressPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* 进度连接线 */
+.progress-line {
+  width: 24px;
+  height: 2px;
+  background: var(--ui-border);
+  transition: background 0.3s ease;
+}
+
+.progress-line.completed {
+  background: var(--accent);
+}
+
+/* 进度标签（悬停显示） */
+.progress-label {
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  font-size: 9px;
+  color: #8b6f47;
+  white-space: nowrap;
+  
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.progress-dot:hover .progress-label,
+.progress-dot.active .progress-label {
+  opacity: 1;
+}
+
+/* 步骤容器 */
+.activation-step-container {
+  min-height: 300px;
+}
+
+/* 步骤通用样式 */
+.activation-step {
+  animation: stepFadeIn 0.4s ease-out;
+}
+
+@keyframes stepFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-title {
+  font-size: 20px;
+  color: var(--accent);
+  margin: 0 0 10px 0;
+  text-align: center;
+  font-family: var(--font-pixel-cn);
+}
+
+.step-subtitle {
+  font-size: 12px;
+  color: #8b6f47;
+  margin: 0 0 30px 0;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.step-content {
+  margin: 20px 0;
+}
+
+/* 步骤按钮组 */
+.step-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+.step-button {
+  padding: 12px 24px;
+  background: var(--accent);
+  border: 3px solid var(--ui-border);
+  color: var(--primary-bg);
+  font-family: var(--font-pixel-cn);
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  
+  box-shadow: 
+    inset -2px -2px 0 rgba(0, 0, 0, 0.3),
+    4px 4px 0 rgba(0, 0, 0, 0.4);
+  
+  transition: all 0.15s;
+}
+
+.step-button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 
+    inset -2px -2px 0 rgba(0, 0, 0, 0.3),
+    6px 6px 0 rgba(0, 0, 0, 0.5);
+}
+
+.step-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 
+    inset -2px -2px 0 rgba(0, 0, 0, 0.3),
+    2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.step-button-secondary {
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--primary-text);
+}
+
+.step-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .activation-card {
+    padding: 20px 24px 30px;
+    max-width: 95%;
+  }
+  
+  .progress-dot {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .progress-dot::before {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .progress-line {
+    width: 16px;
+  }
+  
+  .step-title {
+    font-size: 16px;
+  }
+  
+  .step-buttons {
+    flex-direction: column;
+  }
+  
+  .step-button {
+    width: 100%;
+  }
+}
+

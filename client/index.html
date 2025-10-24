@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Library - Level 2</title>
+</head>
+<body>
+  <!-- 游戏容器 -->
+  <div id="game-container"></div>
+  
+  <!-- HUD - 左上角：楼层信息 + 区域 -->
+  <div id="hud-floor">
+    <div class="hud-card">
+      <div class="floor-level">🏛️ Level 2</div>
+      <div class="floor-region" id="region-name">公共区域</div>
+    </div>
+  </div>
+  
+  <!-- HUD - 右上角：在线人数 + 消息中心 + 勿扰 + 设置 -->
+  <div id="hud-top-right">
+    <div id="online-count-card">
+      <span>👥 </span>
+      <span id="online-count">1</span>
+    </div>
+    
+    <!-- 消息中心按钮 -->
+    <button id="message-center-btn" title="消息中心">
+      💬
+      <span id="message-badge" class="hidden">0</span>
+    </button>
+    
+    <!-- 🆕 勿扰模式按钮 -->
+    <button id="dnd-button" title="勿扰模式 (F键)">🔔</button>
+    
+    <!-- 设置按钮 -->
+    <button id="settings-button" title="设置">⚙️</button>
+  </div>
+  
+  <!-- 🆕 消息中心面板 -->
+  <div id="message-center-panel" class="hidden">
+    <div class="panel-header">
+      <span>💬 消息中心</span>
+      <div class="panel-header-actions">
+        <button id="back-to-list-btn" class="header-btn hidden" title="返回">◀</button>
+        <button id="new-chat-btn" class="header-btn hidden" title="新建聊天">✚</button>
+        <button id="clear-messages-btn">清空</button>
+      </div>
+    </div>
+    
+    <!-- 频道 Tab -->
+    <div id="channel-tabs"></div>
+    
+    <!-- 私信对话列表（仅在私信频道显示） -->
+    <div id="private-conversation-list" class="hidden"></div>
+    
+    <!-- 🆕 在线用户列表（发起新私聊时显示） -->
+    <div id="online-users-list" class="hidden"></div>
+    
+    <!-- 消息列表 -->
+    <div id="message-list"></div>
+    
+    <!-- 输入框（根据频道显示/隐藏） -->
+    <div id="message-input-container" class="hidden">
+      <input 
+        type="text" 
+        id="message-input" 
+        placeholder="输入消息..."
+        maxlength="200"
+      />
+      <button id="send-message-btn">发送</button>
+    </div>
+  </div>
+  
+  <!-- HUD - 底部：操作提示 -->
+  <div id="hud-bottom">
+    <span class="key-hint">WASD</span> 移动
+    <span style="margin: 0 8px;">|</span>
+    <span class="key-hint">E</span> 交互
+    <span style="margin: 0 8px;">|</span>
+    <span class="key-hint">H</span> 切换提示
+    <span style="margin: 0 8px;">|</span>
+    <span class="key-hint">C</span> 消息
+    <span style="margin: 0 8px;">|</span>
+    <span class="key-hint">I</span> 物品栏
+    <span style="margin: 0 8px;">|</span>
+    <span class="key-hint">F</span> 勿扰
+  </div>
+  
+  <!-- 🆕 HUD - 右下角：物品栏按钮 -->
+  <div id="hud-bottom-right">
+    <button id="inventory-btn" title="物品栏">🎒</button>
+  </div>
+  
+  <!-- 🆕 物品栏面板 -->
+  <div id="inventory-panel" class="hidden">
+    <div class="panel-header">
+      <span>🎒 物品栏</span>
+      <button id="close-inventory-btn" class="header-btn">✕</button>
+    </div>
+    
+    <div id="inventory-items"></div>
+  </div>
+  
+  <!-- 🆕 勿扰模式屏幕边缘效果 -->
+  <div id="dnd-overlay"></div>
+  
+  <!-- 浮动通知容器（保留用于重要提醒） -->
+  <div id="notification-container"></div>
+  
+  <!-- 游戏脚本 -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
